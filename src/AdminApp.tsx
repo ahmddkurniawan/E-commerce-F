@@ -97,7 +97,9 @@ const AdminLoginPage: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
 
 // ─── Admin App (with auth guard) ──────────────────────────────
 export default function AdminApp() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    () => localStorage.getItem('admin_auth') === 'true'
+  );
   const [products, setProducts] = useState<Product[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
   const [customers, setCustomers] = useState<CustomerProfile[]>([]);
@@ -155,9 +157,11 @@ export default function AdminApp() {
     } catch { addToast('Error', 'Gagal mengubah status', 'error'); }
   };
 
-  // Show login page if not authenticated
   if (!isAuthenticated) {
-    return <AdminLoginPage onLogin={() => setIsAuthenticated(true)} />;
+    return <AdminLoginPage onLogin={() => {
+      localStorage.setItem('admin_auth', 'true');
+      setIsAuthenticated(true);
+    }} />;
   }
 
   if (isLoading) {
@@ -191,7 +195,10 @@ export default function AdminApp() {
             ← Lihat Toko
           </a>
           <button
-            onClick={() => setIsAuthenticated(false)}
+            onClick={() => {
+              localStorage.removeItem('admin_auth');
+              setIsAuthenticated(false);
+            }}
             className="px-4 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-lg transition-colors cursor-pointer"
           >
             Keluar

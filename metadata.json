@@ -1,0 +1,6 @@
+{
+  "name": "Stitch Supply - Heavywear & Apparel E-Commerce",
+  "description": "Website e-commerce Stitch Supply dengan katalog khusus Hoodie Fleece 330 GSM, Kaos Heavy 16's, Ultra 20's, Eco 24's, serta pilihan bahan premium Lengan Pendek dan Lengan Panjang.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

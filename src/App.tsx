@@ -62,6 +62,21 @@ export default function App() {
 
   // Listen for Google OAuth login/logout from Supabase
   useEffect(() => {
+    // 1. Initial check when app loads
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        const supaUser = session.user;
+        setCurrentUser({
+          id: supaUser.id,
+          name: supaUser.user_metadata?.full_name || supaUser.email?.split('@')[0] || 'User',
+          email: supaUser.email || '',
+          avatar: supaUser.user_metadata?.avatar_url || '',
+          role: 'customer'
+        });
+      }
+    });
+
+    // 2. Listen for future changes (login, logout, token refresh)
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
         const supaUser = session.user;

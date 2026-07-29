@@ -98,9 +98,11 @@ export interface Order {
   discountAmount: number;
   shippingCost: number;
   totalAmount: number;
-  status: 'Pending' | 'Diproses' | 'Dikirim' | 'Selesai' | 'Dibatalkan';
+  status: 'Pending' | 'Menunggu Pembayaran' | 'Diproses' | 'Dikirim' | 'Selesai' | 'Dibatalkan';
+  paymentStatus: 'Belum Bayar' | 'Sudah Bayar' | 'Dikonfirmasi';
   customerInfo: CheckoutForm;
   voucherCode?: string;
+  userId?: string;
 }
 
 export interface User {

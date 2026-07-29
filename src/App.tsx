@@ -535,8 +535,10 @@ export default function App() {
           <CheckoutView
             cartItems={cart}
             appliedVoucher={appliedVoucher}
+            currentUser={currentUser}
             onBackToCart={() => setIsCartOpen(true)}
             onCompleteOrder={handleCompleteOrder}
+            onOpenAuth={() => setIsAuthOpen(true)}
           />
         )}
 
